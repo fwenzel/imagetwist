@@ -1,0 +1,8 @@
+{
+  "name": "imagetwist",
+  "fullName": "imagetwist",
+  "description": "Rotate images, via right-click menu or mouse gesture.",
+  "author": "Fred Wenzel <fwenzel@mozilla.com>",
+  "license": "MPL 2.0",
+  "version": "1.0"
+}
