@@ -1,8 +1,15 @@
 imagetwist
 ==========
 
-This is the imagetwist add-on. It allows you to rotate any image, two ways:
+This is the imagetwist add-on. It allows you to rotate any image:
 
 * Right-click -> Rotate image -> Clockwise / Counterclockwise / 180 degrees
-* Two-finger twist gesture on your trackpad (Mac only??)
 
+
+Acknowledgments
+---------------
+
+Thanks to:
+
+* [http://www.iconfinder.com/search/?q=iconset%3AUltimateGnome](Ultimate Gnome)
+  for the rotation icons.
