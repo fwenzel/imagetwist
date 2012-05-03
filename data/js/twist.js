@@ -1,6 +1,5 @@
 self.on('click', function(node, data) {
-    var deg,
-        rotated;
+    var deg;
 
     switch (data) {
     case 'cw':
@@ -17,24 +16,26 @@ self.on('click', function(node, data) {
         break;
     }
 
-    rotated = rotation(node);
-    if (rotated) {
-        // If already rotated, adjust angle.
-        deg = (parseInt(rotated[1]) + deg) % 360;
-    }
-
     rotation(node, deg);
 });
 
 
 /**
- * Return a node's rotation or set it.
+ * Set a node's rotation, relative to its current rotation.
  */
 function rotation(node, deg) {
     const rotate_re = /rotate\((-?\d+)deg\)/;
 
-    if (deg === undefined)
-        return node.style.MozTransform.match(rotate_re);
+    if (deg === undefined) {
+        node.style.MozTransform = '';
+        return;
+    }
+
+    var rotated = node.style.MozTransform.match(rotate_re);
+    if (rotated) {
+        // If already rotated, adjust angle.
+        deg = (parseInt(rotated[1]) + deg) % 360;
+    }
 
     node.style.MozTransform = 'rotate(' + deg + 'deg)';
 }
