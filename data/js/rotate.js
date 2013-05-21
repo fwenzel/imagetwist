@@ -1,39 +1,54 @@
 /**
  * Set a node's rotation, relative to its current rotation.
  */
-function rotate(node, deg) {
-    const rotate_re = /rotate\((-?\d+)deg\)/;
-    var $node = $(node);
+function rotate(node, dir) {
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
 
-    if (deg === undefined) {
-        $node.css('-moz-transform', '');
-        return;
-    }
+    // Create image w/the same src to determine full resolution of image.
+    var img = new Image();
+    img.onload = function() {
+        var cur_w = img.width,
+            cur_h = img.height;
 
-    // Wrap node so we can make room for the rotation.
-    var $wrapper = $node.parent();
-    if (!$wrapper.hasClass('rotationwrapper')) {
-        $node.wrap('<div class="rotationwrapper">');
-        $wrapper = $node.parent();
-    }
-    var wrapper = $wrapper.get(0);
+        switch (dir) {
+        case 'cw':
+            canvas.width = img.height;
+            canvas.height = img.width;
+            img_x = 0;
+            img_y = -img.height;
+            new_width = node.height;
+            new_height = node.width;
+            angle = Math.PI / 2;
+            break;
 
-    var rotated = wrapper.style.MozTransform.match(rotate_re);
-    if (rotated) {
-        // If already rotated, adjust angle.
-        deg = (parseInt(rotated[1]) + deg) % 360;
-    } else {
-        deg = parseInt(deg);
-    }
+        case 'ccw':
+            canvas.width = img.height;
+            canvas.height = img.width;
+            img_x = -img.width;
+            img_y = 0;
+            new_width = node.height;
+            new_height = node.width;
+            angle = -Math.PI / 2;
+            break;
 
-    // Adjust wrapper size.
-    if (Math.abs(deg % 180) == 90) {
-        $wrapper.css('width', $node.outerHeight());
-        $wrapper.css('height', $node.outerWidth());
-    } else {
-        $wrapper.css('width', '');
-        $wrapper.css('height', '');
-    }
+        case '180':
+            canvas.width = img.width;
+            canvas.height = img.height;
+            img_x = -img.width;
+            img_y = -img.height;
+            new_width = node.width;  // No size change w/180 degrees.
+            new_height = node.height;
+            angle = Math.PI;
+            break;
+        }
 
-    wrapper.style.MozTransform = 'rotate(' + deg + 'deg)';
+        ctx.rotate(angle);
+        ctx.drawImage(node, img_x, img_y);
+
+        node.src = canvas.toDataURL();
+        node.width = new_width;
+        node.height = new_height;
+    };
+    img.src = node.src;
 }
