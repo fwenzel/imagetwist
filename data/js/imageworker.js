@@ -43,7 +43,10 @@ function rotateImage(msg) {
         ctx.rotate(angle);
         ctx.drawImage(img, img_x, img_y);
 
-        self.port.emit('rotated', canvas.toDataURL());
+        canvas.toBlob(function(blob) {
+            var new_url = URL.createObjectURL(blob);
+            self.port.emit('rotated', new_url);
+        });
     };
     img.src = src;
 }

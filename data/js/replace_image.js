@@ -18,6 +18,13 @@ self.port.on('replace', function(msg) {
     }
     node.removeAttribute('data-imagetwist-jobid'); // Discard job ID.
 
+    // If image was previously rotated, we can discard the old blob now.
+    if (node.hasAttribute('data-imagetwisted')) {
+        URL.revokeObjectURL(node.src);
+    } else {
+        node.setAttribute('data-imagetwisted', '');
+    }
+
     if (dir % 2) {
         // 90 or 270 degree turn: Flip width and height.
         var new_height = node.width;
