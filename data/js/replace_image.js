@@ -41,11 +41,13 @@ self.port.on('replace', function(msg) {
             'a#revert { font-size: 150%; margin: 0 1em; }';
         p.innerHTML = 'Image was automatically rotated.<sup><a href="' +
             'https://addons.mozilla.org/addon/imagetwist/">(?)</a></sup> ' +
-            '<a href="' + window.location.href + '" id="revert">&#10008;</a>';
+            '<a href="#" id="revert">&#10008;</a>';
         document.querySelector('head').appendChild(style);
         document.querySelector('body').appendChild(p);
 
-        document.querySelector('a#revert').addEventListener('click', function(e) {
+        var revertLink = document.querySelector('a#revert');
+        revertLink.href = window.location.href;
+        revertLink.addEventListener('click', function(e) {
             e.preventDefault();
             var img = document.images[0];
             img.src = window.location.href;
