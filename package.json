@@ -1,9 +1,9 @@
 {
     "name": "imagetwist",
-    "license": "MPL 2.0",
+    "license": "MIT",
     "author": "Fred Wenzel <fwenzel@mozilla.com>",
     "version": "1.0",
     "fullName": "imagetwist",
     "id": "jid1-4p5x9fY6wqtuqA",
-    "description": "Rotate images, via right-click menu or mouse gesture."
+    "description": "Rotate images, via right-click menu or automatically according to EXIF data."
 }
