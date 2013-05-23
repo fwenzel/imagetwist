@@ -16,6 +16,7 @@ The right-click dialog:
 Example image
 -------------
 Mona Lisa after a gust of wind:
+
 ![Mona Lisa](https://raw.github.com/fwenzel/imagetwist/master/monalisa.jpg)
 
 This image's pixels are oriented "sideways", but the EXIF orientation tag
