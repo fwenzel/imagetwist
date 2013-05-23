@@ -23,11 +23,19 @@ Mona Lisa after a gust of wind:
 This image's pixels are oriented "sideways", but the EXIF orientation tag
 defines how the picture should be shown instead.
 
-To test imagetwist:
+To test imagetwist, **either**:
+
+* (With imagetwist installed)
+* right-click the image
+* under "rotate", choose "clockwise". The image will be rotated.
+
+**or:**
+
 * Right-click the image, and choose "view image".
-* **Without** imagetwist, the "view image" page will show the image as you see
-here.
-* **With** imagetwist enabled, the image on the page will look correct.
+* **Without** imagetwist, the "view image" page will show the image as you
+  see here.
+* **With** imagetwist enabled, the image on the page will look correct,
+  automatically.
 
 Acknowledgments
 ---------------
