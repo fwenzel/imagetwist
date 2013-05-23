@@ -43,12 +43,44 @@ function rotateImage(msg) {
         ctx.rotate(angle);
         ctx.drawImage(img, img_x, img_y);
 
-        canvas.toBlob(function(blob) {
-            var new_url = URL.createObjectURL(blob);
-            self.port.emit('rotated', new_url);
-        });
+        self.port.emit('rotated', [canvas.toDataURL(), dir]);
     };
     img.src = src;
 }
 
+/**
+ * Determine the rotation of the first loaded, local image, and rotate if
+ * necessary.
+ */
+function determineRotation() {
+    var img = document.images[0];
+    EXIF.getData(img, function() {
+        var orientation = EXIF.getTag(img, 'Orientation');
+        if (!orientation) return;
+
+        // cf. http://sylvana.net/jpegcrop/exif_orientation.html
+        // We only handle the cases we can with rotation, not mirroring.
+        switch (orientation) {
+        // Case 1 and 2 are top-up already.
+        case 3:
+        case 4:
+            // 180 deg
+            rotateImage([img.src, 2]);
+            break;
+        case 5:
+        case 6:
+            // 90 deg
+            rotateImage([img.src, 1]);
+            break;
+        case 7:
+        case 8:
+            // 270 deg
+            rotateImage([img.src, 3]);
+            break;
+        }
+    });
+}
+
+// Listeners
 self.port.on('rotate', rotateImage);
+self.port.on('determineRotation', determineRotation);

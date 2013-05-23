@@ -6,23 +6,21 @@ self.port.on('replace', function(msg) {
     var new_src = msg[1];
     var dir = msg[2];
 
-    //console.log('replace: ' + job_id + new_src);
+    //console.log('replace: ' + job_id + ' ' + new_src);
 
     // Find our node.
-    var node = document.querySelector('img[data-imagetwist-jobid=' + job_id + ']');
-    if (!node) {
-        console.log('Oops, could not find image node for job id ' + job_id +
-                    '. Nothing I can do :(');
-        self.port.emit('destroyme');
-        return;
-    }
-    node.removeAttribute('data-imagetwist-jobid'); // Discard job ID.
-
-    // If image was previously rotated, we can discard the old blob now.
-    if (node.hasAttribute('data-imagetwisted')) {
-        URL.revokeObjectURL(node.src);
+    if (job_id === null) {
+        // On a single-image page, we don't need a job id.
+        var node = document.images[0];
     } else {
-        node.setAttribute('data-imagetwisted', '');
+        var node = document.querySelector('img[data-imagetwist-jobid=' + job_id + ']');
+        if (!node) {
+            console.log('Oops, could not find image node for job id ' + job_id +
+                        '. Nothing I can do :(');
+            self.port.emit('destroyme');
+            return;
+        }
+        node.removeAttribute('data-imagetwist-jobid'); // Discard job ID.
     }
 
     if (dir % 2) {
