@@ -32,9 +32,9 @@ Acknowledgments
 
 Thanks to:
 
-* Jacob Seidelin for his [https://github.com/jseidelin/exif-js](exif-js)
+* Jacob Seidelin for his [exif-js](https://github.com/jseidelin/exif-js)
   library.
-* [http://www.iconfinder.com/search/?q=iconset%3Afatcow](Fat Cow) for the
+* [Fat Cow](http://www.iconfinder.com/search/?q=iconset%3Afatcow) for the
   rotation icons (*CC by* licensed).
 
 ## License
