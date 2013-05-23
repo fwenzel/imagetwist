@@ -1,16 +1,17 @@
 imagetwist
 ==========
 
-This is the imagetwist add-on. It allows you to rotate any image:
-
-* Right-click -> Rotate image -> Clockwise / Counterclockwise / 180 degrees
+This is the imagetwist add-on. It allows you to rotate any image through
+its **context menu**: Right-click -> Rotate image -> Clockwise /
+Counterclockwise / 180 degrees
 
 On single-image pages (like the right-click -> "view image" page), images
-will automatically be rotated based on their EXIF data.
+will automatically be rotated based on their **EXIF data**.
 
 Screenshot
 ----------
 The right-click dialog:
+
 ![imagetwist right-click menu](https://raw.github.com/fwenzel/imagetwist/master/screenshot.jpg)
 
 Example image
