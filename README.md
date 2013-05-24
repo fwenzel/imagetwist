@@ -1,6 +1,8 @@
 imagetwist
 ==========
 
+![logo](https://raw.github.com/fwenzel/imagetwist/master/logo64.png)
+
 This is the imagetwist add-on. It allows you to rotate any image through
 its **context menu**: Right-click -> Rotate image -> Clockwise /
 Counterclockwise / 180 degrees
@@ -46,6 +48,7 @@ Thanks to:
   library.
 * [Fat Cow](http://www.iconfinder.com/search/?q=iconset%3Afatcow) for the
   rotation icons (*CC by* licensed).
+* [Webdesigner depot](http://www.webdesignerdepot.com/) for the logo.
 
 ## License
 
