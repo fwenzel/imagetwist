@@ -7,5 +7,8 @@
     "id": "jid1-4p5x9fY6wqtuqA",
     "description": "Rotate images, via right-click menu or automatically according to EXIF data.",
     "icon": "logo48.png",
-    "icon64": "logo64.png"
+    "icon64": "logo64.png",
+    "permissions": {
+        "private-browsing": true
+    }
 }
