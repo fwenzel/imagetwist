@@ -42,8 +42,8 @@ self.port.on('replace', function(msg) {
         p.innerHTML = 'Image was automatically rotated.<sup><a href="' +
             'https://addons.mozilla.org/addon/imagetwist/">(?)</a></sup> ' +
             '<a href="#" id="revert">&#10008;</a>';
-        document.querySelector('head').appendChild(style);
-        document.querySelector('body').appendChild(p);
+        document.head.appendChild(style);
+        document.body.appendChild(p);
 
         var revertLink = document.querySelector('a#revert');
         revertLink.href = window.location.href;
@@ -54,7 +54,7 @@ self.port.on('replace', function(msg) {
             if (dir % 2) {  // Flip dimensions back if needed.
                 flipDimensions(img);
             }
-            document.querySelector('body').removeChild(p);
+            document.body.removeChild(p);
         });
     }
 
