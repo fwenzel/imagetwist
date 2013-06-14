@@ -56,12 +56,16 @@ function determineRotation() {
     var img = document.images[0];
     EXIF.getData(img, function() {
         var orientation = EXIF.getTag(img, 'Orientation');
-        if (!orientation) return;
 
         // cf. http://sylvana.net/jpegcrop/exif_orientation.html
-        // We only handle the cases we can with rotation, not mirroring.
+        // We only handle the cases we can with rotation, not mirroring for now.
         switch (orientation) {
         // Case 1 and 2 are top-up already.
+        case 1:
+        case 2:
+        default:
+            self.port.emit('cancel');
+            return;
         case 3:
         case 4:
             // 180 deg

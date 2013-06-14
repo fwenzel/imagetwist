@@ -9,7 +9,14 @@ function mark_for_rotation(node, dir) {
     node.setAttribute('data-imagetwist-jobid', job_id);
 
     // Send job data to backend.
-    self.postMessage([job_id, node.src, parseInt(dir)]);
+    var src;
+    if (dir === 'exif' && node.hasAttribute('data-imagetwist-origsrc')) {
+        // Use original src for EXIF detection.
+        src = node.getAttribute('data-imagetwist-origsrc');
+    } else {
+        src = node.src;
+    }
+    self.postMessage([job_id, src, parseInt(dir) || dir]);
 }
 
 /** Context menu UI: Listen to click event on menu items. */

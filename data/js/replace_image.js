@@ -27,6 +27,12 @@ self.port.on('replace', function(msg) {
         flipDimensions(node);
     }
 
+    // Remember original src for reverting.
+    if (!node.hasAttribute('data-imagetwist-origsrc')) {
+        node.setAttribute('data-imagetwist-origsrc', node.src);
+    }
+
+    // Set to rotated src.
     node.src = new_src;
 
     // On a single-image page, allow to revert.
@@ -50,7 +56,7 @@ self.port.on('replace', function(msg) {
         revertLink.addEventListener('click', function(e) {
             e.preventDefault();
             var img = document.images[0];
-            img.src = window.location.href;
+            img.src = img.getAttribute('data-imagetwist-origsrc');
             if (dir % 2) {  // Flip dimensions back if needed.
                 flipDimensions(img);
             }
@@ -60,6 +66,18 @@ self.port.on('replace', function(msg) {
 
     self.port.emit('destroyme');  // We don't need this pagemod any longer.
 });
+
+
+/**
+ * No rotation necessary, drop job ID.
+ */
+self.port.on('cancel', function(job_id) {
+    var node = document.querySelector('img[data-imagetwist-jobid=' + job_id + ']');
+    if (node) {
+        node.removeAttribute('data-imagetwist-jobid');
+    }
+});
+
 
 /**
  * Flip image width and height.
