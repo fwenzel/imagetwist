@@ -41,6 +41,7 @@ function revert(img) {
 
     // Reset to original src.
     img.src = img.getAttribute('data-imagetwist-origsrc');
+    img.removeAttribute('data-imagetwist-origsrc');
 
     // Flip (if necessary) and remove rotation direction.
     if (parseInt(img.getAttribute('data-imagetwist-dir')) % 2) {

@@ -4,6 +4,12 @@
  * node: image node. dir: rotation (in clockwise quarter turns).
  */
 function mark_for_rotation(node, dir) {
+    // Revert to original, if requested.
+    if (dir === 'revert') {
+        revert(node);
+        return;
+    }
+
     // Mark node with job ID so we find it again later.
     var job_id = 'job-' + Math.floor((Math.random() * 100000));  // Random job ID for rotation.
     node.setAttribute('data-imagetwist-jobid', job_id);
