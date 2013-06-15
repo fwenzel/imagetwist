@@ -6,8 +6,6 @@ self.port.on('replace', function(msg) {
     var new_src = msg[1];
     var dir = msg[2];
 
-    //console.log('replace: ' + job_id + ' ' + new_src);
-
     // Find our node.
     if (job_id === null) {
         // On a single-image page, we don't need a job id.
@@ -27,13 +25,7 @@ self.port.on('replace', function(msg) {
         flipDimensions(node);
     }
 
-    // Remember original src for reverting.
-    if (!node.hasAttribute('data-imagetwist-origsrc')) {
-        node.setAttribute('data-imagetwist-origsrc', node.src);
-    }
-
-    // Set to rotated src.
-    node.src = new_src;
+    replaceImage(node, new_src, dir)
 
     // On a single-image page, allow to revert.
     if (job_id === null) {
@@ -56,10 +48,7 @@ self.port.on('replace', function(msg) {
         revertLink.addEventListener('click', function(e) {
             e.preventDefault();
             var img = document.images[0];
-            img.src = img.getAttribute('data-imagetwist-origsrc');
-            if (dir % 2) {  // Flip dimensions back if needed.
-                flipDimensions(img);
-            }
+            revert(img);
             document.body.removeChild(p);
         });
     }
@@ -74,17 +63,7 @@ self.port.on('replace', function(msg) {
 self.port.on('cancel', function(job_id) {
     var node = document.querySelector('img[data-imagetwist-jobid=' + job_id + ']');
     if (node) {
+        revert(node);
         node.removeAttribute('data-imagetwist-jobid');
     }
 });
-
-
-/**
- * Flip image width and height.
- */
-function flipDimensions(img) {
-    var new_height = img.width;
-    var new_width = img.height;
-    img.height = new_height;
-    img.width = new_width;
-}
